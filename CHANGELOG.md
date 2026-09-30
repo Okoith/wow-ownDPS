@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Addon icon in the AddOns list
+
 ## 1.0.1
 
 - CurseForge project ID added, automatic uploads to CurseForge
