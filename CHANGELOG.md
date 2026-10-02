@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+- **New option "Colors by rank"** (*Appearance > Colors*, off by default): rank and DPS/HPS value are shown in their own color for rank 1 (green), rank 2 (yellow) and rank 3 and below (red). Name and unit keep their colors. All three colors can be changed.
+- Works in DPS and HPS mode and also when the rank number is hidden (then only the value is colored). Solo you are always rank 1.
+- In Edit Mode the sample line shows the color for rank 1 when the option is on.
+
 ## 1.0.2
 
 - Addon icon in the AddOns list

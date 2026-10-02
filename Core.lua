@@ -26,6 +26,14 @@ ns.defaults = {
       value = WHITE,
       unit = WHITE,
     },
+    -- Farben nach Platzierung (1.1.0). Standard aus: bestehende Profile sehen keine
+    -- Änderung, fehlende Werte kommen über die AceDB-Defaults.
+    rankColors = {
+      enabled = false,
+      first  = { r = 0.1, g = 0.9, b = 0.1 },    -- Platz 1: grün
+      second = { r = 1.0, g = 0.82, b = 0.0 },   -- Platz 2: gelb
+      rest   = { r = 0.9, g = 0.1, b = 0.1 },    -- ab Platz 3: rot
+    },
     font = {
       name = (LSM and LSM:GetDefault("font")) or "Friz Quadrata TT",   -- LibSharedMedia-Schlüssel
       size = 14,
@@ -105,6 +113,7 @@ local function logStatus(s)
     formatted = last.formatted,        -- wird bei Secret zu "<SECRET>"
     setTextOk = last.setTextOk,
     shown = last.shown,
+    rankColors = ns.db.profile.rankColors.enabled,
     trendStyle = ns.db.profile.trend.style,
     trendWindow = ns.db.profile.trend.window,
     trendTolerance = ns.db.profile.trend.tolerance,

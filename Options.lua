@@ -199,7 +199,8 @@ local function buildOptions()
       },
       colorsHeader = { type = "header", order = 10, name = L["OPT_COLORS"] },
       colorRank = {
-        type = "color", order = 11, name = L["ELEMENT_RANK"],
+        type = "color", order = 11, name = L["ELEMENT_RANK"], desc = L["OPT_RANKCOLORS_OVERRIDE"],
+        disabled = function() return ns.db.profile.rankColors.enabled end,
         arg = { "colors", "rank" }, get = getColor, set = setColor,
       },
       colorName = {
@@ -208,12 +209,39 @@ local function buildOptions()
         arg = { "colors", "name" }, get = getColor, set = setColor,
       },
       colorValue = {
-        type = "color", order = 13, name = L["OPT_VALUE"],
+        type = "color", order = 13, name = L["OPT_VALUE"], desc = L["OPT_RANKCOLORS_OVERRIDE"],
+        disabled = function() return ns.db.profile.rankColors.enabled end,
         arg = { "colors", "value" }, get = getColor, set = setColor,
       },
       colorUnit = {
         type = "color", order = 14, name = L["ELEMENT_UNIT"],
         arg = { "colors", "unit" }, get = getColor, set = setColor,
+      },
+      -- Farben nach Platzierung (1.1.0): färbt Platzzahl und Wert, Name/Einheit bleiben
+      rankColors = {
+        type = "group", order = 15, inline = true, name = L["OPT_RANKCOLORS"],
+        args = {
+          enabled = {
+            type = "toggle", order = 1, width = "full",
+            name = L["OPT_RANKCOLORS_ENABLE"], desc = L["OPT_RANKCOLORS_ENABLE_DESC"],
+            arg = { "rankColors", "enabled" }, get = get, set = set,
+          },
+          first = {
+            type = "color", order = 2, name = L["OPT_RANKCOLOR_FIRST"],
+            disabled = function() return not ns.db.profile.rankColors.enabled end,
+            arg = { "rankColors", "first" }, get = getColor, set = setColor,
+          },
+          second = {
+            type = "color", order = 3, name = L["OPT_RANKCOLOR_SECOND"],
+            disabled = function() return not ns.db.profile.rankColors.enabled end,
+            arg = { "rankColors", "second" }, get = getColor, set = setColor,
+          },
+          rest = {
+            type = "color", order = 4, name = L["OPT_RANKCOLOR_REST"],
+            disabled = function() return not ns.db.profile.rankColors.enabled end,
+            arg = { "rankColors", "rest" }, get = getColor, set = setColor,
+          },
+        },
       },
       frameHeader = { type = "header", order = 20, name = L["OPT_FRAME"] },
       backgroundShow = {

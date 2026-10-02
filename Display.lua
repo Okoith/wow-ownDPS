@@ -69,11 +69,32 @@ end
 
 -- Baut den Formatstring aus nicht geheimen Teilen.
 -- Rückgabe: fmt, withRank (true, wenn das erste Argument der Platz ist)
+-- Farbe nach Platzierung (Option rankColors): Platz 1, Platz 2, ab Platz 3.
+-- Der Platz ist im Kampf lesbar (SPEC Abschnitt 10) und stammt aus dem Schleifenindex
+-- in Data.lua. Trotzdem defensiv: ist er geheim, gelten die normalen Farben.
+-- Rückgabe: Farbtabelle oder nil (= normale Farben)
+local function rankColor(p, rank, rankSecret)
+  local rc = p.rankColors
+  if not (rc and rc.enabled) then return nil end
+  if rankSecret then
+    ns.Debug:Error("rankColors", "rank is secret, using normal colors")
+    return nil
+  end
+  if type(rank) ~= "number" then return nil end
+  if rank == 1 then return rc.first end
+  if rank == 2 then return rc.second end
+  return rc.rest
+end
+
 local function buildFormat(p, rank)
   local parts = {}
-  local withRank = p.showRank and rank ~= nil
+  local rankSecret = issecret(rank)
+  -- nie einen möglicherweise geheimen Wert vergleichen
+  local withRank = p.showRank and (rankSecret or rank ~= nil)
+  -- Platzzahl und Wert in der Platzfarbe; Name und Einheit behalten ihre Farben
+  local placeColor = rankColor(p, rank, rankSecret)
   if withRank then
-    parts[#parts + 1] = colorCode(p.colors.rank) .. "%d.|r"
+    parts[#parts + 1] = colorCode(placeColor or p.colors.rank) .. "%d.|r"
   end
   if p.showName then
     local name = UnitName("player") or ""
@@ -85,7 +106,7 @@ local function buildFormat(p, rank)
     end
     parts[#parts + 1] = colorCode(color) .. name:gsub("%%", "%%%%") .. "|r"
   end
-  parts[#parts + 1] = colorCode(p.colors.value) .. "%s|r"
+  parts[#parts + 1] = colorCode(placeColor or p.colors.value) .. "%s|r"
   if p.showUnit then
     local unit = (p.mode == "hps") and L["UNIT_HPS"] or L["UNIT_DPS"]
     parts[#parts + 1] = colorCode(p.colors.unit) .. unit:gsub("%%", "%%%%") .. "|r"
