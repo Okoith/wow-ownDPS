@@ -20,7 +20,7 @@ World of Warcraft addon (Retail 12.1, Midnight) that shows your own DPS or HPS, 
 - **DPS or HPS:** rank, value and trend always refer to the selected mode
 - **Data source:** automatic (current fight in combat, overall otherwise), always current fight, or always overall
 - **Trend indicator** (combat only): arrow, boxes (side by side or stacked), bars, or off; adjustable time window and tolerance
-- **Appearance:** font (LibSharedMedia), size, outline, shadow, colors per element, name in class color, background, border, scale, opacity
+- **Appearance:** font (LibSharedMedia), size, outline, shadow, colors per element, name in class color, optional colors by rank, background, border, scale, opacity
 - **Edit Mode:** move the display in WoW's Edit Mode, position saved per layout, option to lock it; a sample line with trend indicator is shown there
 - **No empty frame:** while there is no value (for example before your first hit), the display is hidden completely
 - **Visibility:** always, only in instances, only in a group, or only in combat; optionally hidden in vehicles; always hidden during pet battles
@@ -49,7 +49,8 @@ Install OwnDPS from [CurseForge](https://www.curseforge.com/wow/addons/owndps) (
 ### Settings
 
 - **General:** mode, data source, rank/name/unit, name in class color, lock, reset position, visibility, hide in vehicles, debug mode
-- **Appearance:** font, font size, outline, shadow, colors, background, border, scale, opacity
+- **Appearance:** font, font size, outline, shadow, colors, colors by rank, background, border, scale, opacity
+  - **Colors by rank** (off by default): rank and value are shown in their own color for rank 1 (green), rank 2 (yellow) and rank 3 and below (red); name and unit keep their colors. Solo you are always rank 1. Works in DPS and HPS mode and also when the rank number is hidden.
 - **Trend:** style, box arrangement, time window, tolerance, indicator size, colors
 - **Profiles:** switch, copy from another character, reset
 
