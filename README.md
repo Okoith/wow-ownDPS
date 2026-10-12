@@ -2,7 +2,7 @@
 
 <p align="center"><img src="docs/owndps_logo.png" alt="OwnDPS logo" width="256"></p>
 
-World of Warcraft addon (Retail 12.1, Midnight) that shows your own DPS or HPS, your rank and a trend indicator in a single line:
+World of Warcraft addon (Retail 12.1 and 12.1.5, Midnight) that shows your own DPS or HPS, your rank and a trend indicator in a single line:
 
 ```
 1. 495.1k DPS ▲

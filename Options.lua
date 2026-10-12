@@ -96,6 +96,12 @@ local function buildOptions()
     args = {},
   }
 
+  -- Addon-Version oben im Fenster, über den Tabs (ns.VERSION, zur Laufzeit aus der TOC gelesen)
+  o.args.version = {
+    type = "description", order = 0, width = "full",
+    name = function() return L["OPT_VERSION"]:format(ns.VERSION) .. "\n" end,
+  }
+
   -- Allgemein ---------------------------------------------------------------
   o.args.general = {
     type = "group", order = 1, name = L["TAB_GENERAL"],

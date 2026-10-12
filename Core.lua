@@ -7,7 +7,14 @@ local UPDATE_INTERVAL = 0.25     -- SPEC Abschnitt 8
 local STATUS_INTERVAL = 1.0      -- Debug-Statuseintrag im Kampf
 local POST_COMBAT_STATUS = 5     -- Sekunden nach Kampfende weiter Status loggen
 
-ns.VERSION = (C_AddOns and C_AddOns.GetAddOnMetadata and C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version")) or "?"
+-- Version zur Laufzeit aus der TOC lesen (nie hart kodieren), Fallback "?"
+do
+  local ok, v = false, nil
+  if C_AddOns and C_AddOns.GetAddOnMetadata then
+    ok, v = pcall(C_AddOns.GetAddOnMetadata, ADDON_NAME, "Version")
+  end
+  ns.VERSION = (ok and type(v) == "string" and v ~= "") and v or "?"
+end
 
 local WHITE = { r = 1, g = 1, b = 1 }
 local LSM = LibStub("LibSharedMedia-3.0", true)
@@ -387,6 +394,7 @@ end
 
 function commands.status()
   local p = ns.db.profile
+  Print(L["OPT_VERSION"]:format(ns.VERSION))
   Print(L["STATUS"]:format(modeName(p.mode), L[SOURCE_NAMES[p.dataSource] or "SOURCE_AUTO"], ns.db:GetCurrentProfile()))
   local t = p.trend
   Print(L["STATUS_TREND"]:format(L[STYLE_NAMES[t.style] or "STYLE_ARROW"], t.window, t.tolerance * 100,

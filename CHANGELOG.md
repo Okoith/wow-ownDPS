@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1
+
+- Compatible with patch 12.1.5 (Interface 120105)
+- The addon version is shown in the settings
+
 ## 1.1.0
 
 - **New option "Colors by rank"** (*Appearance > Colors*, off by default): rank and DPS/HPS value are shown in their own color for rank 1 (green), rank 2 (yellow) and rank 3 and below (red). Name and unit keep their colors. All three colors can be changed.
